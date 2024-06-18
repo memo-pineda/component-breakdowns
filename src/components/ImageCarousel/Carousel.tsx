@@ -58,7 +58,7 @@ const Carousel: FC<CarouselProps> = ({ images }) => {
   }
 
   const loadImage = (idx: number) => {
-    loadedImages[idx] = true;
+    loadedImages[handleEnds(idx, 0, images.length - 1)] = true;
     setLoadedImages([...loadedImages]);
   }
 
