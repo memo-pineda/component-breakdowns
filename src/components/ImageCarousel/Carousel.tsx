@@ -39,22 +39,8 @@ const Carousel: FC<CarouselProps> = ({ images }) => {
   }, []))
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const goToPrevPhoto = () => {
-    setCurrentImg((curr) => {
-      const updated = handleEnds(curr - 1, 0, images.length - 1);
-      return updated;
-    })
-  }
-
-  const goToNextPhoto = () => {
-    setCurrentImg((curr) => {
-      const updated = handleEnds(curr + 1, 0, images.length - 1);
-      return updated;
-    })
-  }
-
   const goToSpecificPhoto = (idx: number) => {
-    setCurrentImg(idx);
+    setCurrentImg(handleEnds(idx, 0, images.length - 1));
   }
 
   const loadImage = (idx: number) => {
@@ -74,9 +60,9 @@ const Carousel: FC<CarouselProps> = ({ images }) => {
       {images.map((image, idx) => <LazyImage src={image.src} alt={image.altText} isLoaded={loadedImages[idx]} key={`image_${idx}`}/>)}
     </div>
     <div>
-      <button onClick={goToPrevPhoto} onMouseEnter={() => loadImage(currentImg - 1)}>{'<'}</button>
+      <button onClick={() => goToSpecificPhoto(currentImg - 1)} onMouseEnter={() => loadImage(currentImg - 1)}>{'<'}</button>
       {images.map((_, idx) => <button onClick={() => goToSpecificPhoto(idx)} key={`button_${idx}`} onMouseEnter={() => loadImage(idx)}>{idx + 1}</button>)}
-      <button onClick={goToNextPhoto} onMouseEnter={() => loadImage(currentImg + 1)}>{'>'}</button>
+      <button onClick={() => goToSpecificPhoto(currentImg + 1)} onMouseEnter={() => loadImage(currentImg + 1)}>{'>'}</button>
     </div>
   </>
 }
