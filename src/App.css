@@ -52,13 +52,17 @@
 
 .image-container {
   display: flex;
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   overflow: hidden;
 }
 
 .image {
-  min-height: 500px;
-  min-width: 500px;
+  min-height: 400px;
+  min-width: 400px;
   object-fit: cover;
+}
+
+.image--hidden {
+  display: none;
 }
