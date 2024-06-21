@@ -28,9 +28,9 @@ interface Image {
 /** Todos
  * - [ ] component recycling
  * - [ ] list virtualization
- * - [ ] Move prev/next buttons closer to images
+ * - [x] Move prev/next buttons closer to images
  * - [x] Fetch images from api
- * - [ ] Ellipse the numbered buttons
+ * - [/] Ellipse the numbered buttons
  * - [ ] Pressed states for buttons
  */
 
@@ -119,16 +119,15 @@ const Carousel: FC<CarouselProps> = () => {
     return <div>Images loading</div>
   }
 
-  return <>
+  return <div className="container">
     <div className="image-container" ref={containerRef}>
       {images.map((image, idx) => <LazyImage src={image.urls.small} alt={image.alt_description} isLoaded={idx === 0 ? true : loadedImages[idx]} key={image.id}/>)}
     </div>
-    <div>
+    <div className="buttons">
       <button onClick={() => goToSpecificPhoto(currentImg - 1)} onMouseEnter={() => loadImage(currentImg - 1)}>{'<'}</button>
-      {images.map((_, idx) => <button onClick={() => goToSpecificPhoto(idx)} key={`button_${idx}`} onMouseEnter={() => loadImage(idx)}>{idx + 1}</button>)}
       <button onClick={() => goToSpecificPhoto(currentImg + 1)} onMouseEnter={() => loadImage(currentImg + 1)}>{'>'}</button>
     </div>
-  </>
+  </div>
 }
 
 export default Carousel;
